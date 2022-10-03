@@ -1,14 +1,36 @@
-import React,{useState} from "react"
+import React from "react"
+import PackageContext from "./Hooks/Context/Context"
+import Provider from "./Hooks/Context/Provider"
 
-const App=()=>{
-       const [gold, setGold]   = useState(0)
-       
+
+
+const Smiley = () => {
     return (
         <div>
-           <h1>{gold}</h1>
-           <button onClick={()=>{setGold(gold+1)}}>Increase Gold</button>
-           <button onClick={()=>{setGold(gold-1)}}>Decrease Gold</button>
-           <button onClick={()=>{setGold(0)}}>Reset Gold</button>
+            <PackageContext.Consumer> 
+               { (value) => (
+                    <div>
+                        <h4>Name of Cricketer is : {value.data.name}</h4>
+                        <p>Age of Cricketer is : {value.data.age}</p>
+                        <button onClick={value.updateCrickterAge}>Update Age</button>
+                        <p>Country of Cricketer is : {value.data.country}</p>
+                        <pre>Heighest Score of Cricketer is : {value.data.heighestScore}</pre>
+                    </div>
+                )
+               }    
+            </PackageContext.Consumer> 
+        </div>
+    )
+}
+
+const App=()=>{
+      
+    return (
+        <div>
+            <h1> Hello World</h1>
+            <Provider>
+                <Smiley />
+            </Provider>
         </div>
     )
 }
